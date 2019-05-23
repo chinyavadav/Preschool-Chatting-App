@@ -1,0 +1,42 @@
+<!--
+  Generated template for the PupilsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>Pupils List [{{ total }}]</ion-title>
+  </ion-navbar>
+  <ion-toolbar color="dark">
+    <ion-searchbar showCancelButton autocomplete="on" color="danger" (ionInput)="filterPupils($event)" placeholder="Filter Pupil"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item-sliding  *ngFor="let pupil of pupils" #item>
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="{{ global.serverAddress }}avatars/{{ pupil.fldpupilid }}.jpg">
+        </ion-avatar>
+        <h2>{{ pupil.fldfirstname }} {{ pupil.fldsurname }} ({{ pupil.fldpupilid }})</h2>
+        <p>({{ pupil.fldsex }})</p>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button *ngIf="global.session.fldtype=='Administrator'" color="danger" (click)="delete(item,pupil.fldpupilid)">
+          <ion-icon name="close"></ion-icon>
+          Delete
+        </button>
+        <button ion-button color="dark" (click)="profile(item,pupil.fldpupilid)">
+          <ion-icon name="contact"></ion-icon>
+          Profile
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab right bottom>
+    <button ion-fab (click)="showAddPupil()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

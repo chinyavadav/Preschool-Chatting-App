@@ -1,0 +1,71 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar color="dark">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content padding>
+    <ion-list *ngIf="global.accessLevel=='Parent'">
+      <button menuClose ion-item detail-none>
+        <ion-icon item-start name="home"></ion-icon> Home</button>
+      <button menuClose ion-item detail-none (click)="openPage(0)">
+        <ion-icon item-start name="people"></ion-icon> My Children</button>
+      <ion-item-divider>
+        Account
+    </ion-item-divider>
+      <button menuClose ion-item detail-none (click)="openPage(2)">
+        <ion-icon item-start name="contact"></ion-icon> Profile</button>
+      <button menuClose ion-item detail-none (click)="logout()">
+        <ion-icon item-start name="log-out"></ion-icon> Logout</button>
+    <!--ion-item menuClose detail-none>Close Menu</ion-item-->
+    </ion-list>
+    <ion-list *ngIf="global.accessLevel=='Teacher'">
+      <button menuClose ion-item detail-none>
+        <ion-icon item-start name="home"></ion-icon> Home</button>
+      <button menuClose ion-item detail-none (click)="openPage(1)">
+        <ion-icon item-start name="people"></ion-icon> My Students</button>
+      <ion-item-divider>
+        Account
+    </ion-item-divider>
+      <button menuClose ion-item detail-none (click)="openPage(2)">
+        <ion-icon item-start name="contact"></ion-icon> Profile</button>
+      <button menuClose ion-item detail-none (click)="logout()">
+        <ion-icon item-start name="log-out"></ion-icon> Logout</button>
+    <!--ion-item menuClose detail-none>Close Menu</ion-item-->
+    </ion-list>
+    <ion-list *ngIf="global.accessLevel == 'Administrator'">
+      <button menuClose ion-item detail-none>
+        <ion-icon item-start name="home"></ion-icon> Home</button>
+      <button menuClose ion-item detail-none (click)="openPage(1)">
+        <ion-icon item-start name="people"></ion-icon> Pupils</button>
+      <button menuClose ion-item detail-none (click)="openUsersPage('Parent')">
+        <ion-icon item-start name="people"></ion-icon> Parents</button>
+      <button menuClose ion-item detail-none (click)="openUsersPage('Teacher')">
+        <ion-icon item-start name="people"></ion-icon> Teachers</button>
+      <ion-item-divider>
+        Account
+    </ion-item-divider>
+      <button menuClose ion-item detail-none (click)="openPage(2)">
+        <ion-icon item-start name="contact"></ion-icon> Profile</button>
+      <button menuClose ion-item detail-none (click)="logout()">
+        <ion-icon item-start name="log-out"></ion-icon> Logout</button>
+    <!--ion-item menuClose detail-none>Close Menu</ion-item-->
+    </ion-list>
+    <ion-list *ngIf="!global.accessLevel">
+      <button menuClose ion-item detail-none (click)="openPage(3)">
+        <ion-icon item-start name="cog"></ion-icon> Settings</button>
+    </ion-list>
+
+   </ion-content>
+    <ion-footer padding>
+      <ion-toolbar text-center>
+        <ion-title>
+          <b>MAMAK Preschool </b><small>v.1.0.1 </small>     
+        </ion-title>       
+      </ion-toolbar>
+  </ion-footer>
+  </ion-menu>
+ 
+<!-- main navigation -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

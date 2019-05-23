@@ -1,0 +1,50 @@
+<!--
+  Generated template for the UsersPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>{{ filterType }}s List [{{ total }}]</ion-title>
+  </ion-navbar>
+  <ion-toolbar color="dark">
+    <ion-searchbar showCancelButton autocomplete="on" color="danger" (ionInput)="filterUsers($event)" placeholder="Filter {{ filterType }}"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item-sliding  *ngFor="let user of users" #item>
+      <ion-item (click)="pushUser(user)">
+        <ion-avatar item-left>
+          <img src="{{ global.serverAddress }}avatars/{{user.accountno}}.jpg">
+        </ion-avatar>
+        <h2>{{ user.fullname }} ({{user.accountno}})</h2>
+        <p>{{ user.type }}</p>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button color="danger" (click)="delete(item,user.accountno)">
+          <ion-icon name="close"></ion-icon>
+          Delete
+        </button>
+        <button *ngIf="user.type=='Teacher'" ion-button color="primary" (click)="add(item,'Teacher',user.accountno)">
+          <ion-icon name="contact"></ion-icon>
+          Add Pupil
+        </button>
+        <button *ngIf="user.type=='Parent'" ion-button color="primary" (click)="add(item,'Parent',user.accountno)">
+          <ion-icon name="contact"></ion-icon>
+          Add Child
+        </button>
+        <button ion-button color="secondary" (click)="profile(item,user.accountno)">
+          <ion-icon name="contact"></ion-icon>
+          Profile
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab right bottom>
+    <button ion-fab (click)="showAddUser()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>
